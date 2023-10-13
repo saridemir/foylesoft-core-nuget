@@ -8,7 +8,6 @@
 	
 	
 	<ItemGroup>
-		<!--<ProjectReference Include="..\..\anita-azure-function-api\FoyleSoft.AzureCore\FoyleSoft.AzureCore.csproj" />-->
 		<ProjectReference Include="..\FoyleSoft.AzureCore\FoyleSoft.AzureCore.csproj" />
 	</ItemGroup>
 	
