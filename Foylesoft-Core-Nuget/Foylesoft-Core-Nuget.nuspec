@@ -3,10 +3,10 @@
   <metadata>
     <id>FoyleSoft.AzureCore</id>
     <version>0.0.1</version>
-    <title>Foyle Soft</title>
-    <authors>Yilmaz</authors>
+    <title>FoyleSoft AzureCore</title>
+    <authors>Yilmaz saridemir</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">Commercual</license>
+    <license type="expression">Commercial</license>
     <!-- <icon>icon.png</icon> -->
     <projectUrl>https://github.com/saridemir/foylesoft-core-nuget</projectUrl>
     <description>FoyleSoft.AzureCore bundled in one convenient package. Needs supporting database to run.</description>
@@ -15,7 +15,7 @@
         v 0.0.1
           - Initial package release info
     </releaseNotes>
-    <copyright>Foyle Soft</copyright>
+    <copyright>Foylesoft ltd</copyright>
     <tags>Foyle Soft</tags>
     
     <dependencies>
