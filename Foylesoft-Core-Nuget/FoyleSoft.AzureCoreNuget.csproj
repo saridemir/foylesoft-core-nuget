@@ -5,11 +5,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-	
-	
-	<ItemGroup>
-		<ProjectReference Include="..\FoyleSoft.AzureCore\FoyleSoft.AzureCore.csproj" />
-	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FoyleSoft.AzureCore\FoyleSoft.AzureCore.csproj" />
+  </ItemGroup>
 	
 	
 </Project>

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>FoyleSoft.AzureCore</id>
-    <version>1.0.30</version>
+    <version>0.0.0.2</version>
     <title>FoyleSoft AzureCore</title>
     <authors>Yilmaz Saridemir</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

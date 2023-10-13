@@ -3363,38 +3363,6 @@
         "runtime": {
           "lib/net6.0/ZstdSharp.dll": {}
         }
-      },
-      "FoyleSoft.AzureCore/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Azure.Extensions.AspNetCore.Configuration.Secrets": "1.2.2",
-          "Azure.Identity": "1.9.0",
-          "Azure.Storage.Blobs": "12.17.0",
-          "Microsoft.ApplicationInsights": "2.21.0",
-          "Microsoft.AspNetCore.Http": "2.2.2",
-          "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
-          "Microsoft.Azure.Functions.Extensions": "1.1.0",
-          "Microsoft.EntityFrameworkCore": "6.0.21",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.21",
-          "Microsoft.Extensions.Caching.StackExchangeRedis": "6.0.21",
-          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
-          "Microsoft.Extensions.Configuration.AzureKeyVault": "3.1.24",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
-          "MongoDB.Driver": "2.21.0",
-          "Pomelo.EntityFrameworkCore.MySql": "6.0.2",
-          "Serilog": "3.0.1",
-          "Serilog.Extensions.Logging": "3.1.0",
-          "Serilog.Sinks.ApplicationInsights": "4.0.0",
-          "Serilog.Sinks.Console": "4.1.0",
-          "Serilog.Sinks.File": "5.0.0"
-        },
-        "compile": {
-          "bin/placeholder/FoyleSoft.AzureCore.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FoyleSoft.AzureCore.dll": {}
-        }
       }
     }
   },
@@ -9707,16 +9675,30 @@
         "zstdsharp.port.0.6.2.nupkg.sha512",
         "zstdsharp.port.nuspec"
       ]
-    },
-    "FoyleSoft.AzureCore/1.0.0": {
-      "type": "project",
-      "path": "../FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj",
-      "msbuildProject": "../FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "FoyleSoft.AzureCore >= 1.0.0"
+      "Azure.Extensions.AspNetCore.Configuration.Secrets >= 1.2.2",
+      "Azure.Identity >= 1.9.0",
+      "Azure.Storage.Blobs >= 12.17.0",
+      "Microsoft.ApplicationInsights >= 2.21.0",
+      "Microsoft.AspNetCore.Http >= 2.2.2",
+      "Microsoft.AspNetCore.Mvc.Abstractions >= 2.2.0",
+      "Microsoft.Azure.Functions.Extensions >= 1.1.0",
+      "Microsoft.EntityFrameworkCore >= 6.0.21",
+      "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.21",
+      "Microsoft.Extensions.Caching.StackExchangeRedis >= 6.0.21",
+      "Microsoft.Extensions.Configuration.Abstractions >= 6.0.0",
+      "Microsoft.Extensions.Configuration.AzureKeyVault >= 3.1.24",
+      "Microsoft.Extensions.DependencyInjection.Abstractions >= 6.0.0",
+      "MongoDB.Driver >= 2.21.0",
+      "Pomelo.EntityFrameworkCore.MySql >= 6.0.2",
+      "Serilog >= 3.0.1",
+      "Serilog.Extensions.Logging >= 3.1.0",
+      "Serilog.Sinks.ApplicationInsights >= 4.0.0",
+      "Serilog.Sinks.Console >= 4.1.0",
+      "Serilog.Sinks.File >= 5.0.0"
     ]
   },
   "packageFolders": {
@@ -9725,11 +9707,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\Foylesoft-Core-Nuget\\FoyleSoft.AzureCoreNuget.csproj",
-      "projectName": "FoyleSoft.AzureCoreNuget",
-      "projectPath": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\Foylesoft-Core-Nuget\\FoyleSoft.AzureCoreNuget.csproj",
+      "projectUniqueName": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\FoyleSoft.AzureCore\\FoyleSoft.AzureCore.csproj",
+      "projectName": "FoyleSoft.AzureCore",
+      "projectPath": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\FoyleSoft.AzureCore\\FoyleSoft.AzureCore.csproj",
       "packagesPath": "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\Foylesoft-Core-Nuget\\obj\\",
+      "outputPath": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\FoyleSoft.AzureCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Waqas Ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9747,11 +9729,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\FoyleSoft.AzureCore\\FoyleSoft.AzureCore.csproj": {
-              "projectPath": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\FoyleSoft.AzureCore\\FoyleSoft.AzureCore.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -9763,6 +9741,88 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "Azure.Extensions.AspNetCore.Configuration.Secrets": {
+            "target": "Package",
+            "version": "[1.2.2, )"
+          },
+          "Azure.Identity": {
+            "target": "Package",
+            "version": "[1.9.0, )"
+          },
+          "Azure.Storage.Blobs": {
+            "target": "Package",
+            "version": "[12.17.0, )"
+          },
+          "Microsoft.ApplicationInsights": {
+            "target": "Package",
+            "version": "[2.21.0, )"
+          },
+          "Microsoft.AspNetCore.Http": {
+            "target": "Package",
+            "version": "[2.2.2, )"
+          },
+          "Microsoft.AspNetCore.Mvc.Abstractions": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.Azure.Functions.Extensions": {
+            "target": "Package",
+            "version": "[1.1.0, )"
+          },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[6.0.21, )"
+          },
+          "Microsoft.EntityFrameworkCore.SqlServer": {
+            "target": "Package",
+            "version": "[6.0.21, )"
+          },
+          "Microsoft.Extensions.Caching.StackExchangeRedis": {
+            "target": "Package",
+            "version": "[6.0.21, )"
+          },
+          "Microsoft.Extensions.Configuration.Abstractions": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
+          "Microsoft.Extensions.Configuration.AzureKeyVault": {
+            "target": "Package",
+            "version": "[3.1.24, )"
+          },
+          "Microsoft.Extensions.DependencyInjection.Abstractions": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
+          "MongoDB.Driver": {
+            "target": "Package",
+            "version": "[2.21.0, )"
+          },
+          "Pomelo.EntityFrameworkCore.MySql": {
+            "target": "Package",
+            "version": "[6.0.2, )"
+          },
+          "Serilog": {
+            "target": "Package",
+            "version": "[3.0.1, )"
+          },
+          "Serilog.Extensions.Logging": {
+            "target": "Package",
+            "version": "[3.1.0, )"
+          },
+          "Serilog.Sinks.ApplicationInsights": {
+            "target": "Package",
+            "version": "[4.0.0, )"
+          },
+          "Serilog.Sinks.Console": {
+            "target": "Package",
+            "version": "[4.1.0, )"
+          },
+          "Serilog.Sinks.File": {
+            "target": "Package",
+            "version": "[5.0.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

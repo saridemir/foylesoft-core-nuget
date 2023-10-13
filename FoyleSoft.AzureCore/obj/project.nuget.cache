@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DUhzT8mkoRqVcowDGvNNhP1oAjrt25CiTewyb9SQXk9Njk41XQIT+CYpZkaCjRD9w4HB74oYgtuCu2QuQQrzTQ==",
+  "dgSpecHash": "ivvIYNGumsijewudDiVdXeBpHWasKWVeEHdxHqJnjI/bBXKB/C3Otvh9gb+NUrbaz7WsaknsKAPGXYWZeKQs2Q==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\Foylesoft-Core-Nuget\\FoyleSoft.AzureCoreNuget.csproj",
+  "projectFilePath": "D:\\Projects\\Learning Project\\foylesoft\\saridemir\\foylesoft-core-nuget\\FoyleSoft.AzureCore\\FoyleSoft.AzureCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
@@ -194,8 +194,7 @@
     "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\system.xml.xmlserializer\\4.0.11\\system.xml.xmlserializer.4.0.11.nupkg.sha512",
-    "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\zstdsharp.port\\0.6.2\\zstdsharp.port.0.6.2.nupkg.sha512",
-    "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\foylesoft.azurecore\\1.0.0\\foylesoft.azurecore.1.0.0.nupkg.sha512"
+    "C:\\Users\\Waqas Ahmed\\.nuget\\packages\\zstdsharp.port\\0.6.2\\zstdsharp.port.0.6.2.nupkg.sha512"
   ],
   "logs": []
 }
