@@ -5,7 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+	
+	
 	<ItemGroup>
-		<ProjectReference Include="..\..\anita-azure-function-api\FoyleSoft.AzureCore\FoyleSoft.AzureCore.csproj" />
+		<!--<ProjectReference Include="..\..\anita-azure-function-api\FoyleSoft.AzureCore\FoyleSoft.AzureCore.csproj" />-->
+		<ProjectReference Include="..\FoyleSoft.AzureCore\FoyleSoft.AzureCore.csproj" />
 	</ItemGroup>
+	
+	
 </Project>
