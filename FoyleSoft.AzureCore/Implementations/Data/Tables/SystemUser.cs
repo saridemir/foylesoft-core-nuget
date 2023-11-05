@@ -9,6 +9,6 @@ namespace FoyleSoft.Core.Implementations.Data.Tables
     {
         public Guid UserGuid { get; set; }
         public string UserName { get; set; }
-        public int CompanyId { get; set; }
+        public int LicenseId { get; set; }
     }
 }

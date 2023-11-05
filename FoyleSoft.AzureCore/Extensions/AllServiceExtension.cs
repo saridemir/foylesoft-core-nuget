@@ -3,7 +3,6 @@ using FoyleSoft.AzureCore.Implementations;
 using FoyleSoft.AzureCore.Interfaces;
 using FoyleSoft.AzureCore.Interfaces.Repositories.Roles;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -46,8 +45,8 @@ namespace FoyleSoft.AzureCore.Extensions
             builder.Services.AddSingleton<ICacheService, CacheService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IGraphApiService, GraphApiService>();
-            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddHttpContextAccessor();
+
             var azureConfigurationService = builder.Services.BuildServiceProvider().GetService<IAzureConfigurationService>();
             string apiName = apiDll.GetName().Name ?? "NONAME";
             ApplyLogConfiguration(azureConfigurationService, apiName);
@@ -59,7 +58,7 @@ namespace FoyleSoft.AzureCore.Extensions
 
             dataDlls.ForEach(dataDll =>
             {
-                dummy.RunMongoRepository(builder.Services, azureConfigurationService, dataDll, typeof(IMongoCollectionRepositoryAsync));
+                dummy.RunMongoRepository(builder.Services, azureConfigurationService, dataDll, typeof(IMongoCollectionRepositoryAsync<>));
                 dummy.RunRepository(builder.Services, azureConfigurationService, dataDll, typeof(IBaseRepositoryAsync<>), customSesionRepository);
             });
             serviceDlls.ForEach(serviceDll =>
@@ -73,7 +72,7 @@ namespace FoyleSoft.AzureCore.Extensions
             var azureCacheService = builder.Services.BuildServiceProvider().GetService<ICacheService>();
 
             builder.Services.AddTransient<IBlobStorageService, BlobStorageService>
-                (f => new BlobStorageService(azureCacheService,azureConfigurationService,
+                (f => new BlobStorageService(azureCacheService, azureConfigurationService,
                     new BlobServiceClient(azureConfigurationService.AzureConfig.StorageAccountConnection)));
             return builder;
 
@@ -254,7 +253,7 @@ namespace FoyleSoft.AzureCore.Extensions
                     BindingFlags.Public | BindingFlags.Instance);
                 if (method != null)
                 {
-                    if (f.Name.IndexOf("BaseRepositoryAsync") >= 0) 
+                    if (f.Name.IndexOf("BaseRepositoryAsync") >= 0)
                     {
                     }
                     method = method.MakeGenericMethod(f.GetInterfaces().First(p => p.Name == "I" + f.Name), f);

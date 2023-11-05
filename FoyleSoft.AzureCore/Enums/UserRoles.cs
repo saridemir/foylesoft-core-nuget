@@ -9,8 +9,8 @@ namespace FoyleSoft.Core.Enums
     {
        // [Description("User")]
         User = 1,
-        // [Description("Company Admin")]
-        CompanyAdmin = 2,
+       // [Description("Company Admin")]
+        LicenseAdmin = 2,
        // [Description("System Admin")]
         SystemAdmin = 4,
     }

@@ -4,8 +4,8 @@
 
 //namespace FoyleSoft.Core.Interfaces.Data
 //{
-//    public interface ICompanyTable
+//    public interface ILicenseTable
 //    {
-//        int CompanyId { get; set; }
+//        int EvideLicenseId { get; set; }
 //    }
 //}

@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FoyleSoft.AzureCore
-build_property.ProjectDir = D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\
+build_property.ProjectDir = C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\

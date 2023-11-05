@@ -19,7 +19,7 @@ namespace FoyleSoft.AzureCore.Helpers
             _configurationService = configurationService;
         }
 
-        public IBaseResponse<string> GenerateFormJWTTokenByClaims(Guid companyGuid, string jsonString)
+        public IBaseResponse<string> GenerateFormJWTTokenByClaims(Guid licenseGuid, string jsonString)
         {
             try
             {
@@ -30,11 +30,11 @@ namespace FoyleSoft.AzureCore.Helpers
 
                 var claims = new List<Claim>
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, companyGuid.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Sub, licenseGuid.ToString()),
                     new Claim("ClassJson", jsonString),
                     new Claim("UserId", "0"),
                     new Claim("UserName", "contact"),
-                    new Claim("Company", "0"),
+                    new Claim("License", "0"),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
                 claims.AddRange(userRoles.Select(n => new Claim(ClaimTypes.Role, n)));

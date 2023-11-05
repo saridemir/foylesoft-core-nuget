@@ -1,12 +1,12 @@
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\bin\Debug\net6.0\FoyleSoft.AzureCore.deps.json
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\bin\Debug\net6.0\FoyleSoft.AzureCore.dll
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\bin\Debug\net6.0\FoyleSoft.AzureCore.pdb
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.csproj.AssemblyReference.cache
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.GeneratedMSBuildEditorConfig.editorconfig
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.AssemblyInfoInputs.cache
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.AssemblyInfo.cs
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.csproj.CoreCompileInputs.cache
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.dll
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\refint\FoyleSoft.AzureCore.dll
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.pdb
-D:\Projects\Learning Project\foylesoft\saridemir\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\ref\FoyleSoft.AzureCore.dll
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.csproj.AssemblyReference.cache
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.AssemblyInfoInputs.cache
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.AssemblyInfo.cs
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.csproj.CoreCompileInputs.cache
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\bin\Debug\net6.0\FoyleSoft.AzureCore.deps.json
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\bin\Debug\net6.0\FoyleSoft.AzureCore.dll
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\bin\Debug\net6.0\FoyleSoft.AzureCore.pdb
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.dll
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\refint\FoyleSoft.AzureCore.dll
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\FoyleSoft.AzureCore.pdb
+C:\Projects\FoyleSoft\AzureNuget\foylesoft-core-nuget\FoyleSoft.AzureCore\obj\Debug\net6.0\ref\FoyleSoft.AzureCore.dll

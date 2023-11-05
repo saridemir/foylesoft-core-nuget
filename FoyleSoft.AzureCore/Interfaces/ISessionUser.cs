@@ -12,8 +12,8 @@ namespace FoyleSoft.AzureCore.Interfaces
     public interface ISessionUser
     {
         int CurrentUserId { get; }
-        //int CurrentCompanyId { get; }
+        //int CurrentLicenseId { get; }
 
-        //int CurrentStoreId { get; }
+        //int CurrentProjectId { get; }
     }
 }

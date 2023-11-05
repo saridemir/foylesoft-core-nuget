@@ -112,17 +112,17 @@ namespace FoyleSoft.AzureCore.Implementations
                 {
                     availableRoles = roles;
                 }
-                else if (await HasAccessAsync("StoreAdmin"))
+                else if (await HasAccessAsync("ProjectAdmin"))
                 {
                     roles.ForEach(async role =>
                     {
-                        if (await HasAccessAsync("StoreRole_" + role.Name))
+                        if (await HasAccessAsync("ProjectRole_" + role.Name))
                         {
                             availableRoles.Add(role);
                         }
                     });
                 }
-                else if (await HasAccessAsync("CompanyAdmin"))
+                else if (await HasAccessAsync("LicenseAdmin"))
                 {
                     roles.ForEach(async role =>
                     {
