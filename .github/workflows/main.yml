@@ -50,9 +50,9 @@ jobs:
       - name: dotnet build and publish
         run: |
           dotnet restore
-          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
-          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' --version-suffix $GITHUB_RUN_ID FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' ./FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' --version-suffix $GITHUB_RUN_ID ./FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
-        run: dotnet nuget push --api-key AzureArtifacts FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj/bin/Release/*.nupkg 
+        run: dotnet nuget push --api-key AzureArtifacts ./FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj/bin/Release/*.nupkg 
