@@ -24,10 +24,10 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       # Run dotnet build and package
-      - name: dotnet build and test
+      - name: dotnet build
         run: |
-          dotnet restore -p ./FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
-          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' -p ./FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
 
   az-artifacts-build-and-deploy:
     needs: build
@@ -48,9 +48,9 @@ jobs:
       # Run dotnet build and package
       - name: dotnet build and publish
         run: |
-          dotnet restore
-          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' -p ./FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
-          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' --version-suffix $GITHUB_RUN_ID -p ./FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' --version-suffix $GITHUB_RUN_ID FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
