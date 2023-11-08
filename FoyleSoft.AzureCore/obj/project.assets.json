@@ -10501,7 +10501,6 @@
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Projects\\FoyleSoft\\AzureNuget\\foylesoft-core-nuget\\Foylesoft-Core-Nuget\\NuGet.Config",
         "C:\\Users\\sarid\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -10510,7 +10509,10 @@
         "net6.0"
       ],
       "sources": {
-        "https://pkgs.dev.azure.com/foylesoftnuget/_packaging/foylesoftnuget/nuget/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.pkg.github.com/rmc0207/index.json": {},
+        "https://pkgs.dev.azure.com/foylesoftnuget/FoylesoftCoreNuget/_packaging/FoyleSoftNugetArtifact/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
