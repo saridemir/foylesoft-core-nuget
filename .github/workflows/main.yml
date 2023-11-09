@@ -54,4 +54,4 @@ jobs:
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
-        run: dotnet nuget push --api-key AzureArtifacts /home/runner/work/foylesoft-core-nuget/foylesoft-core-nuget/FoyleSoft.AzureCore/bin/Releas/*.nupkg 
+        run: dotnet nuget push --api-key AzureArtifacts /home/runner/work/foylesoft-core-nuget/foylesoft-core-nuget/FoyleSoft.AzureCore/bin/Release/*.nupkg 
