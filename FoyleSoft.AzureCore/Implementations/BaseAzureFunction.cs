@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace FoyleSoft.AzureCore.Implementations
 {
-    
+    [FoyleSoftAzureAuthorization]
     public class BaseAzureFunction<T> where T : class
     {
         protected readonly ILogger<T> _logger;
