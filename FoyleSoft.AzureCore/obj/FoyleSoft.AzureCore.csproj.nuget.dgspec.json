@@ -27,7 +27,6 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.pkg.github.com/rmc0207/index.json": {},
           "https://pkgs.dev.azure.com/foylesoftcouk/_packaging/foylesoftcouk/nuget/v3/index.json": {}
         },
         "frameworks": {
@@ -61,10 +60,6 @@
             "Microsoft.ApplicationInsights": {
               "target": "Package",
               "version": "[2.21.0, )"
-            },
-            "Microsoft.AspNetCore.Http": {
-              "target": "Package",
-              "version": "[2.2.2, )"
             },
             "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
