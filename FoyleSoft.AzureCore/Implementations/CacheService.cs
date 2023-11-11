@@ -78,14 +78,14 @@ namespace FoyleSoft.AzureCore.Implementations
                     {
                         var result = data.ToList();
 
-                        var serializedResult = JsonConvert.SerializeObject(result);
+                        var serializedResult = System.Text.Json.JsonSerializer.Serialize(result);
                         await _distributedCache.SetStringAsync(key, serializedResult, new DistributedCacheEntryOptions { AbsoluteExpiration = DateTimeOffset.Now.AddHours(1) });
 
                         return result;
                     }
                     else
                     {
-                        return JsonConvert.DeserializeObject<List<T>>(cachedData);
+                        return System.Text.Json.JsonSerializer.Deserialize<List<T>>(cachedData);
                     }
                 }
                 finally
@@ -96,7 +96,7 @@ namespace FoyleSoft.AzureCore.Implementations
             }
             else
             {
-                return JsonConvert.DeserializeObject<List<T>>(cachedData);
+                return System.Text.Json.JsonSerializer.Deserialize<List<T>>(cachedData);
             }
         }
 
