@@ -342,3 +342,11 @@ ssh/
 /.gitignore
 /FoyleSoft.AzureCore/obj/FoyleSoft.AzureCore.csproj.nuget.dgspec.json
 /FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.AssemblyInfoInputs.cache
+/FoyleSoft.AzureCore/bin/Debug/net6.0/FoyleSoft.AzureCore.deps.json
+/FoyleSoft.AzureCore/bin/Debug/net6.0/FoyleSoft.AzureCore.dll
+/FoyleSoft.AzureCore/bin/Debug/net6.0/FoyleSoft.AzureCore.pdb
+/FoyleSoft.AzureCore/obj/Debug/net6.0/ref/FoyleSoft.AzureCore.dll
+/FoyleSoft.AzureCore/obj/Debug/net6.0/refint/FoyleSoft.AzureCore.dll
+/FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.dll
+/FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.pdb
+/.gitignore
