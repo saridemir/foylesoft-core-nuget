@@ -340,3 +340,5 @@ ssh/
 /FoyleSoft.AzureCore/obj/project.assets.json
 /FoyleSoft.AzureCore/obj/project.nuget.cache
 /.gitignore
+/FoyleSoft.AzureCore/obj/FoyleSoft.AzureCore.csproj.nuget.dgspec.json
+/FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.AssemblyInfoInputs.cache
