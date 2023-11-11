@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "FoyleSoft.AzureCore/1.0.0": {
+      "FoyleSoft.AzureCore/2.0.4": {
         "dependencies": {
           "Azure.Extensions.AspNetCore.Configuration.Secrets": "1.2.2",
           "Azure.Identity": "1.9.0",
@@ -2362,7 +2362,7 @@
     }
   },
   "libraries": {
-    "FoyleSoft.AzureCore/1.0.0": {
+    "FoyleSoft.AzureCore/2.0.4": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

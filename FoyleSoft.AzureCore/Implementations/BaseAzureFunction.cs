@@ -17,15 +17,14 @@ using System.Threading.Tasks;
 namespace FoyleSoft.AzureCore.Implementations
 {
     [FoyleSoftAzureAuthorization]
-    public class BaseAzureFunction<T> where T : class
+    public class BaseAzureFunction<T> : AnonymousAzureFunction<T> where T : class, IBaseAzureFunction
     {
         protected readonly ILogger<T> _logger;
         protected readonly ICacheService _cacheService;
         public BaseAzureFunction(
-            ILogger<T> log, ICacheService cacheService)
+            ILogger<T> log, ICacheService cacheService):base(log,cacheService)
         {
-            _logger = log;
-            _cacheService = cacheService;
+
         }
 
 
