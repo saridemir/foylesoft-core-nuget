@@ -335,3 +335,8 @@ gcpconfig
 
 # speridian stuff
 ssh/
+/FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.AssemblyInfo.cs
+/FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.assets.cache
+/FoyleSoft.AzureCore/obj/project.assets.json
+/FoyleSoft.AzureCore/obj/project.nuget.cache
+/.gitignore
