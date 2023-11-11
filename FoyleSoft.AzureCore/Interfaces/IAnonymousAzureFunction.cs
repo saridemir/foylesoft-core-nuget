@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoyleSoft.AzureCore.Interfaces
 {
-    public interface IBaseAzureFunction: IAnonymousAzureFunction
+    public interface IAnonymousAzureFunction
     {
-        
     }
 }
