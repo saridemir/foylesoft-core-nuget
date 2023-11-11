@@ -1,0 +1,1 @@
+# foylesoft-core-nuget
