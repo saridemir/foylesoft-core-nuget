@@ -1,0 +1,63 @@
+name: Push a NuGet package to Azure Artifacts
+
+on:
+  push:
+    branches:
+      - test-pipeline
+
+env:
+  AZURE_ARTIFACTS_FEED_URL: "https://pkgs.dev.azure.com/foylesoftcouk/_packaging/foylesoftcouk/nuget/v3/index.json"
+  BUILD_CONFIGURATION: 'Release'    # set this to the appropriate build configuration
+  DOTNET_VERSION: '6.x' 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repo
+      - uses: actions/checkout@v2
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      # Run dotnet build and package
+      - name: dotnet build
+        run: |
+          dotnet restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+
+  az-artifacts-build-and-deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repo
+      - uses: actions/checkout@v2
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          source-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }} 
+
+      - name: Get version
+        id: get-version
+        uses: KageKirin/get-csproj-version@v1.0.0
+        with:
+          file: FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj # Specify your .csproj file path
+
+      # Run dotnet build and package
+      - name: dotnet build and pack
+        run: |
+          dotnet restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' -p:Version=${{steps.get-version.outputs.version}} FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+
+      # Publish the package to Azure Artifacts
+      - name: 'dotnet publish'
+        run: dotnet nuget push --api-key AzureArtifacts /home/runner/work/foylesoft-core-nuget/foylesoft-core-nuget/FoyleSoft.AzureCore/bin/Release/*.nupkg 
