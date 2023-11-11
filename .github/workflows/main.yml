@@ -50,7 +50,7 @@ jobs:
         run: |
           dotnet restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
           dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
-          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' --version-suffix $GITHUB_RUN_ID FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' -p:PackageVersion=$VERSION FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
