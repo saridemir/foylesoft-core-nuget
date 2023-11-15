@@ -350,3 +350,4 @@ ssh/
 /FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.dll
 /FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.pdb
 /.gitignore
+/FoyleSoft.AzureCore/obj/Debug/net6.0/FoyleSoft.AzureCore.csproj.CoreCompileInputs.cache
