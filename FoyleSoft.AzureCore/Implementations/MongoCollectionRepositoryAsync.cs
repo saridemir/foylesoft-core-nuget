@@ -13,7 +13,18 @@ namespace FoyleSoft.AzureCore.Implementations
         protected readonly MongoClient _mongoClient;
         private readonly string _connectionCountry;
         public string ConnectionCountry { get => _connectionCountry; }
+        public MongoCollectionRepositoryAsync(IAzureConfigurationService azureConfigurationService)
+        {
+            var config = azureConfigurationService.AzureConfig.CosmosDb.FirstOrDefault();
+            if (config == null)
+            {
+                throw new Exception($"CosmosDb not found");
+            }
+            _connectionCountry = config.Country;
+            _mongoClient = new MongoClient(config.ConnectionString);
+            _database = _mongoClient.GetDatabase(config.DatabaseName);
 
+        }
         public MongoCollectionRepositoryAsync(string country, IAzureConfigurationService azureConfigurationService)
         {
             _connectionCountry = country;
