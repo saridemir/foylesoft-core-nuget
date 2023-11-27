@@ -34,7 +34,7 @@ namespace FoyleSoft.AzureCore.Extensions
             List<Assembly> serviceDlls,
             Type customSesionRepository,
             Type sessionService,
-            Assembly apiDll,string configurationKey= "AzureConfig",string clientConfigurationKey= "ClientConfig")
+            Assembly apiDll,string configurationKey,string clientConfigurationKey)
         {
 
             var dummy = new Dummy();
