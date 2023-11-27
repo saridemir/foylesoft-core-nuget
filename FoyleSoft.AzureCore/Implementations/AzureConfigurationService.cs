@@ -13,10 +13,10 @@ namespace FoyleSoft.AzureCore.Implementations
 {
     public class AzureConfigurationService : IAzureConfigurationService
     {
-        public AzureConfigurationService(IConfiguration configuration)
+        public AzureConfigurationService(IConfiguration configuration, string configurationKey , string clientConfigurationKey )
         {
-            AzureConfig = JsonConvert.DeserializeObject<AzureConfigInfo>(configuration.GetSection("AzureConfigNew").Value);
-            ClientConfig = JsonConvert.DeserializeObject<ClientConfigInfo>(configuration.GetSection("ClientConfig").Value);
+            AzureConfig = JsonConvert.DeserializeObject<AzureConfigInfo>(configuration.GetSection(configurationKey).Value);
+            ClientConfig = JsonConvert.DeserializeObject<ClientConfigInfo>(configuration.GetSection(clientConfigurationKey).Value);
         }
         public AzureConfigInfo AzureConfig { get; set; }
 
