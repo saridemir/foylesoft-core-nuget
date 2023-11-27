@@ -34,13 +34,14 @@ namespace FoyleSoft.AzureCore.Extensions
             List<Assembly> serviceDlls,
             Type customSesionRepository,
             Type sessionService,
-            Assembly apiDll)
+            Assembly apiDll,string configurationKey= "AzureConfig",string clientConfigurationKey= "ClientConfig")
         {
 
             var dummy = new Dummy();
+            var _configuration = builder.Services.BuildServiceProvider().GetService<IConfiguration>();
 
             //services.AddTransient<IRoleService, RoleService>();
-            builder.Services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>();
+            builder.Services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>(f=> new AzureConfigurationService(_configuration, configurationKey, clientConfigurationKey));
             builder.Services.AddScoped<IAzureADJwtBearerValidation, AzureADJwtBearerValidation>();
             builder.Services.AddSingleton<ICacheService, CacheService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
