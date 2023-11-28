@@ -15,6 +15,8 @@ namespace FoyleSoft.AzureCore.Models
         public string UserPrincipalName { get; set; }
         public List<Identity> Identities { get; set; }
         public PasswordProfile PasswordProfile { get; set; }
+        public bool AccountEnabled { get; set; }
+
     }
     public class UpdateGrapUserInfo
     {
