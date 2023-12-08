@@ -20,7 +20,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.Extensions.Logging.Console;
 namespace FoyleSoft.AzureCore.Extensions
 {
     public static class AllServiceExtension
@@ -34,14 +34,14 @@ namespace FoyleSoft.AzureCore.Extensions
             List<Assembly> serviceDlls,
             Type customSesionRepository,
             Type sessionService,
-            Assembly apiDll,string configurationKey,string clientConfigurationKey)
+            Assembly apiDll, string configurationKey, string clientConfigurationKey)
         {
 
             var dummy = new Dummy();
             var _configuration = builder.Services.BuildServiceProvider().GetService<IConfiguration>();
 
             //services.AddTransient<IRoleService, RoleService>();
-            builder.Services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>(f=> new AzureConfigurationService(_configuration, configurationKey, clientConfigurationKey));
+            builder.Services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>(f => new AzureConfigurationService(_configuration, configurationKey, clientConfigurationKey));
             builder.Services.AddScoped<IAzureADJwtBearerValidation, AzureADJwtBearerValidation>();
             builder.Services.AddSingleton<ICacheService, CacheService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
@@ -52,7 +52,11 @@ namespace FoyleSoft.AzureCore.Extensions
             string apiName = apiDll.GetName().Name ?? "NONAME";
             ApplyLogConfiguration(azureConfigurationService, apiName);
             ApplyCacheConfiguration(builder, azureConfigurationService, apiName);
-            builder.Services.AddLogging(configure => configure.AddSerilog(Log.Logger));
+            builder.Services.AddLogging(configure =>
+            {
+                configure.AddSerilog(Log.Logger);
+                configure.AddConsole();
+            });
 
 
             ApplyDataConfiguration(dummy, builder, dataDlls, azureConfigurationService);
