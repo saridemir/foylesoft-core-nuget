@@ -10,14 +10,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.Logging;
 
 namespace FoyleSoft.AzureCore.Implementations
 {
     public class GraphApiService : IGraphApiService
     {
         private readonly IAzureConfigurationService _azureConfigurationService;
-        public GraphApiService(IAzureConfigurationService azureConfigurationService)
+        private readonly ILogger<GraphApiService> _logger;
+        public GraphApiService(IAzureConfigurationService azureConfigurationService,ILogger<GraphApiService> logger)
         {
+            _logger = logger;
             _azureConfigurationService = azureConfigurationService;
         }
         public async Task<string> CreateUserAsync(AddGrapUserInfo userInfo)
@@ -27,7 +30,8 @@ namespace FoyleSoft.AzureCore.Implementations
                 var serializerSettings = new JsonSerializerSettings();
                 serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 var str = JsonConvert.SerializeObject(userInfo, serializerSettings);
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetAccessTokenAsync().Result);
+                var token = await GetAccessTokenAsync();
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var content = new StringContent(str, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync("https://graph.microsoft.com/v1.0/users", content);
                 var responseContent = await response.Content.ReadAsStringAsync();
@@ -39,7 +43,8 @@ namespace FoyleSoft.AzureCore.Implementations
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetAccessTokenAsync().Result);
+                var token = await GetAccessTokenAsync();
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var response = await httpClient.GetAsync($"https://graph.microsoft.com/v1.0/users/{userGuid}");
                 var responseContent = await response.Content.ReadAsStringAsync();
                 return responseContent;
@@ -56,7 +61,9 @@ namespace FoyleSoft.AzureCore.Implementations
                 var serializerSettings = new JsonSerializerSettings();
                 serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 var str = JsonConvert.SerializeObject(userInfo, serializerSettings);
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetAccessTokenAsync().Result);
+                var token = await GetAccessTokenAsync();
+
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var content = new StringContent(str, Encoding.UTF8, "application/json");
                 var response = await httpClient.PatchAsync($"https://graph.microsoft.com/v1.0/users/{userGuid}", content);
                 var responseContent = await response.Content.ReadAsStringAsync();
@@ -68,7 +75,8 @@ namespace FoyleSoft.AzureCore.Implementations
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetAccessTokenAsync().Result);
+                var token = await GetAccessTokenAsync();
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 await httpClient.DeleteAsync($"https://graph.microsoft.com/v1.0/users/{userGuid}");
             }
         }
@@ -87,6 +95,7 @@ namespace FoyleSoft.AzureCore.Implementations
 
                 var response = await httpClient.PostAsync($"https://login.microsoftonline.com/{_azureConfigurationService.AzureConfig.TenantId}/oauth2/v2.0/token", content);
                 var responseContent = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation(responseContent);
                 var accessToken = responseContent.Split("\"access_token\":\"")[1].Split("\"")[0];
                 return accessToken;
             }
