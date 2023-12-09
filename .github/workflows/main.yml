@@ -26,7 +26,7 @@ jobs:
       # Run dotnet build and package
       - name: dotnet build
         run: |
-          dotnet restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj --force
+          dotnet restore 
           dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
 
   az-artifacts-build-and-deploy:
