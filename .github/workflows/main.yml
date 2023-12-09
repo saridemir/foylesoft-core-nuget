@@ -54,7 +54,7 @@ jobs:
       # Run dotnet build and package
       - name: dotnet build and pack
         run: |
-          nuget restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
           dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
           dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' -p:Version=${{steps.get-version.outputs.version}} FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
 
