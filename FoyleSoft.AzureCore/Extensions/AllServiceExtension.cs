@@ -20,7 +20,6 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging.Console;
 namespace FoyleSoft.AzureCore.Extensions
 {
     public static class AllServiceExtension
@@ -55,7 +54,7 @@ namespace FoyleSoft.AzureCore.Extensions
             builder.Services.AddLogging(configure =>
             {
                 configure.AddSerilog(Log.Logger);
-                configure.AddConsole();
+                //configure.AddConsole();
             });
 
 
