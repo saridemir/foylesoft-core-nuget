@@ -25,10 +25,21 @@ namespace FoyleSoft.AzureCore.Extensions
     public static class AllServiceExtension
     {
         private static Assembly _dataDll;
-
-        public static void ApplyAllServices(IConfiguration _configuration, IServiceCollection services,
+        public static IFunctionsHostBuilder ApplyAllServices(this IFunctionsHostBuilder builder,
             //List<Claim> claims,
             //List<string> roleNames,
+            List<Assembly> dataDlls,
+            List<Assembly> serviceDlls,
+            Type customSesionRepository,
+            Type sessionService,
+            Assembly apiDll, string configurationKey, string clientConfigurationKey)
+        {
+            var _configuration = builder.Services.BuildServiceProvider().GetService<IConfiguration>();
+
+            RunAllServices(_configuration, builder.Services, dataDlls, serviceDlls, customSesionRepository, sessionService, apiDll, configurationKey, clientConfigurationKey);
+            return builder;
+        }
+        public static void RunAllServices(IConfiguration _configuration, IServiceCollection services,
             List<Assembly> dataDlls,
             List<Assembly> serviceDlls,
             Type customSesionRepository,
