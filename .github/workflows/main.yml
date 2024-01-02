@@ -49,7 +49,7 @@ jobs:
         id: get-version
         uses: kzrnm/get-net-sdk-project-versions-action@v1.3.0
         with:
-          file: FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj # Specify your .csproj file path
+          proj-path: FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj # Specify your .csproj file path
 
       # Run dotnet build and package
       - name: dotnet build and pack
