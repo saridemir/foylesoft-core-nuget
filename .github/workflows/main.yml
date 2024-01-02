@@ -8,8 +8,8 @@ on:
 env:
   AZURE_ARTIFACTS_FEED_URL: "https://pkgs.dev.azure.com/foylesoftcouk/_packaging/foylesoftcouk/nuget/v3/index.json"
   BUILD_CONFIGURATION: 'Release'    # set this to the appropriate build configuration
-  DOTNET_VERSION: '6.x' 
-
+  DOTNET_VERSION: '6.x'
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -47,9 +47,9 @@ jobs:
 
       - name: Get version
         id: get-version
-        uses: KageKirin/get-csproj-version@v1.0.0
+        uses: kzrnm/get-net-sdk-project-versions-action@v1.3.0
         with:
-          file: FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj # Specify your .csproj file path
+          proj-path: FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj # Specify your .csproj file path
 
       # Run dotnet build and package
       - name: dotnet build and pack
@@ -60,4 +60,4 @@ jobs:
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
-        run: dotnet nuget push --api-key AzureArtifacts /home/runner/work/foylesoft-core-nuget/foylesoft-core-nuget/FoyleSoft.AzureCore/bin/Release/*.nupkg 
+        run: dotnet nuget push --api-key ${{ secrets.AZURE_DEVOPS_TOKEN }} /home/runner/work/foylesoft-core-nuget/foylesoft-core-nuget/FoyleSoft.AzureCore/bin/Release/*.nupkg 
