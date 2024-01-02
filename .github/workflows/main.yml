@@ -8,8 +8,7 @@ on:
 env:
   AZURE_ARTIFACTS_FEED_URL: "https://pkgs.dev.azure.com/foylesoftcouk/_packaging/foylesoftcouk/nuget/v3/index.json"
   BUILD_CONFIGURATION: 'Release'    # set this to the appropriate build configuration
-  DOTNET_VERSION: '6.x' 
-  Package_Version: '2.1.0'
+  DOTNET_VERSION: '6.x'
   
 jobs:
   build:
@@ -57,7 +56,7 @@ jobs:
         run: |
           dotnet restore FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
           dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
-          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' -p:Version=${{env.Package_Version}} FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
+          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' -p:Version=${{steps.get-version.outputs.version}} FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'
