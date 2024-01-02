@@ -47,7 +47,7 @@ jobs:
 
       - name: Get version
         id: get-version
-        uses: KageKirin/get-csproj-version@v1.0.0
+        uses: kzrnm/get-net-sdk-project-versions-action@v1.3.0
         with:
           file: FoyleSoft.AzureCore/FoyleSoft.AzureCore.csproj # Specify your .csproj file path
 
