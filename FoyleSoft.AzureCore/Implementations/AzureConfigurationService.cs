@@ -15,6 +15,7 @@ namespace FoyleSoft.AzureCore.Implementations
     {
         public AzureConfigurationService(IConfiguration configuration, string configurationKey , string clientConfigurationKey )
         {
+            
             AzureConfig = JsonConvert.DeserializeObject<AzureConfigInfo>(configuration.GetSection(configurationKey).Value);
             ClientConfig = JsonConvert.DeserializeObject<ClientConfigInfo>(configuration.GetSection(clientConfigurationKey).Value);
         }

@@ -21,6 +21,11 @@ namespace FoyleSoft.AzureCore.Extensions
     {
         public static IFunctionsConfigurationBuilder ApplyAllConfiguration(this IFunctionsConfigurationBuilder builder,string jsonFileName, string azureConfigKey) 
         {
+            RunAllConfiguration(builder.ConfigurationBuilder, jsonFileName, azureConfigKey);
+            return builder;
+        }
+        public static void RunAllConfiguration(IConfigurationBuilder configurationBuilder, string jsonFileName, string azureConfigKey)
+        {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Environment.CurrentDirectory)
                 .AddJsonFile(jsonFileName, optional: true, reloadOnChange: true)
@@ -30,10 +35,8 @@ namespace FoyleSoft.AzureCore.Extensions
             var azureKeyVaultEndpoint = configuration[azureConfigKey];
             if (!string.IsNullOrEmpty(azureKeyVaultEndpoint))
             {
-                builder.ConfigurationBuilder.AddAzureKeyVault(new Uri(azureKeyVaultEndpoint), new DefaultAzureCredential());
+                configurationBuilder.AddAzureKeyVault(new Uri(azureKeyVaultEndpoint), new DefaultAzureCredential());
             }
-            return builder;
         }
-        
     }
 }

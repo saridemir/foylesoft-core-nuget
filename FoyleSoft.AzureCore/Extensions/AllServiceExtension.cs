@@ -25,7 +25,6 @@ namespace FoyleSoft.AzureCore.Extensions
     public static class AllServiceExtension
     {
         private static Assembly _dataDll;
-
         public static IFunctionsHostBuilder ApplyAllServices(this IFunctionsHostBuilder builder,
             //List<Claim> claims,
             //List<string> roleNames,
@@ -35,68 +34,82 @@ namespace FoyleSoft.AzureCore.Extensions
             Type sessionService,
             Assembly apiDll, string configurationKey, string clientConfigurationKey)
         {
-
-            var dummy = new Dummy();
             var _configuration = builder.Services.BuildServiceProvider().GetService<IConfiguration>();
 
-            //services.AddTransient<IRoleService, RoleService>();
-            builder.Services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>(f => new AzureConfigurationService(_configuration, configurationKey, clientConfigurationKey));
-            builder.Services.AddScoped<IAzureADJwtBearerValidation, AzureADJwtBearerValidation>();
-            builder.Services.AddSingleton<ICacheService, CacheService>();
-            builder.Services.AddScoped<IRoleService, RoleService>();
-            builder.Services.AddScoped<IGraphApiService, GraphApiService>();
-            builder.Services.AddHttpContextAccessor();
-
-            var azureConfigurationService = builder.Services.BuildServiceProvider().GetService<IAzureConfigurationService>();
-            string apiName = apiDll.GetName().Name ?? "NONAME";
-            ApplyLogConfiguration(azureConfigurationService, apiName);
-            ApplyCacheConfiguration(builder, azureConfigurationService, apiName);
-            builder.Services.AddLogging(configure =>
-            {
-                configure.AddSerilog(Log.Logger);
-                //configure.AddConsole();
-            });
-
-
-            ApplyDataConfiguration(dummy, builder, dataDlls, azureConfigurationService);
-
-            dataDlls.ForEach(dataDll =>
-            {
-                dummy.RunMongoRepository(builder.Services, azureConfigurationService, dataDll, typeof(IMongoCollectionRepositoryAsync<>));
-                dummy.RunRepository(builder.Services, azureConfigurationService, dataDll, typeof(IBaseRepositoryAsync<>), customSesionRepository);
-            });
-            serviceDlls.ForEach(serviceDll =>
-            {
-                dummy.RunRepository(builder.Services, azureConfigurationService, serviceDll, typeof(IBaseService), customSesionRepository);
-            });
-
-            dummy.RunRepositorySessionService(builder.Services, sessionService);
-
-
-            var azureCacheService = builder.Services.BuildServiceProvider().GetService<ICacheService>();
-
-            builder.Services.AddTransient<IBlobStorageService, BlobStorageService>
-                (f => new BlobStorageService(azureCacheService, azureConfigurationService,
-                    new BlobServiceClient(azureConfigurationService.AzureConfig.StorageAccountConnection)));
+            RunAllServices(_configuration, builder.Services, dataDlls, serviceDlls, customSesionRepository, sessionService, apiDll, configurationKey, clientConfigurationKey);
             return builder;
+        }
+        public static void RunAllServices(IConfiguration _configuration, IServiceCollection services,
+            List<Assembly> dataDlls,
+            List<Assembly> serviceDlls,
+            Type customSesionRepository,
+            Type sessionService,
+            Assembly apiDll, string configurationKey, string clientConfigurationKey)
+        {
 
+            var dummy = new Dummy();
+
+            //services.AddTransient<IRoleService, RoleService>();
+            services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>(f => new AzureConfigurationService(_configuration, configurationKey, clientConfigurationKey));
+            services.AddScoped<IAzureADJwtBearerValidation, AzureADJwtBearerValidation>();
+            services.AddSingleton<ICacheService, CacheService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IGraphApiService, GraphApiService>();
+            services.AddHttpContextAccessor();
+
+            var azureConfigurationService = services.BuildServiceProvider().GetService<IAzureConfigurationService>();
+            if (azureConfigurationService != null)
+            {
+                string apiName = apiDll.GetName().Name ?? "NONAME";
+                ApplyLogConfiguration(azureConfigurationService, apiName);
+                ApplyCacheConfiguration(services, azureConfigurationService, apiName);
+                services.AddLogging(configure =>
+                {
+                    configure.AddSerilog(Log.Logger);
+                    //configure.AddConsole();
+                });
+
+
+                ApplyDataConfiguration(dummy, services, dataDlls, azureConfigurationService);
+
+                dataDlls.ForEach(dataDll =>
+                {
+                    dummy.RunMongoRepository(services, azureConfigurationService, dataDll, typeof(IMongoCollectionRepositoryAsync<>));
+                    dummy.RunRepository(services, azureConfigurationService, dataDll, typeof(IBaseRepositoryAsync<>), customSesionRepository);
+                });
+                serviceDlls.ForEach(serviceDll =>
+                {
+                    dummy.RunRepository(services, azureConfigurationService, serviceDll, typeof(IBaseService), customSesionRepository);
+                });
+
+                dummy.RunRepositorySessionService(services, sessionService);
+
+
+                var azureCacheService = services.BuildServiceProvider().GetService<ICacheService>();
+                if (azureCacheService != null)
+                {
+                    services.AddTransient<IBlobStorageService, BlobStorageService>
+                        (f => new BlobStorageService(azureCacheService, azureConfigurationService,
+                            new BlobServiceClient(azureConfigurationService.AzureConfig.StorageAccountConnection)));
+                }
+            }
         }
 
-        private static void ApplyDataConfiguration(Dummy dummy, IFunctionsHostBuilder builder, List<Assembly> dataDlls, IAzureConfigurationService azureConfigurationService)
+        private static void ApplyDataConfiguration(Dummy dummy, IServiceCollection services, List<Assembly> dataDlls, IAzureConfigurationService azureConfigurationService)
         {
             dataDlls.ForEach(dataDll =>
             {
-                dummy.ImplementMySqlDbContext(builder.Services, dataDll, typeof(FoyleSoftMySqlContext), azureConfigurationService.AzureConfig.ConnectionStringMySQL);
-                dummy.ImplementMySqlDbContext(builder.Services, dataDll, typeof(FoyleSoftMySqlLogContext), azureConfigurationService.AzureConfig.ConnectionStringMySQL);
+                dummy.ImplementMySqlDbContext(services, dataDll, typeof(FoyleSoftMySqlContext), azureConfigurationService.AzureConfig.ConnectionStringMySQL);
+                dummy.ImplementMySqlDbContext(services, dataDll, typeof(FoyleSoftMySqlLogContext), azureConfigurationService.AzureConfig.ConnectionStringMySQL);
             });
         }
 
 
-        private static void ApplyCacheConfiguration(IFunctionsHostBuilder builder, IAzureConfigurationService azureConfigurationService, string instanceName)
+        private static void ApplyCacheConfiguration(IServiceCollection services, IAzureConfigurationService azureConfigurationService, string instanceName)
         {
             if (azureConfigurationService is not null)
             {
-                builder.Services.AddStackExchangeRedisCache(options =>
+                services.AddStackExchangeRedisCache(options =>
                 {
                     options.Configuration = azureConfigurationService.AzureConfig.AzureRedisConnection;
                     options.InstanceName = instanceName;
@@ -104,7 +117,7 @@ namespace FoyleSoft.AzureCore.Extensions
             }
             else
             {
-                builder.Services.AddDistributedMemoryCache();
+                services.AddDistributedMemoryCache();
             }
 
         }
