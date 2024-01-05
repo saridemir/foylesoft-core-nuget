@@ -21,6 +21,7 @@ namespace FoyleSoft.AzureCore.Models
         public string StorageContainerName { get; set; }
         
         public string ConnectionStringMySQL { get; set; }
+        public string SmsConnection { get; set; }
         public string Domain { get; set; }
         public string BaseApi { get => "/api/"; }
 
