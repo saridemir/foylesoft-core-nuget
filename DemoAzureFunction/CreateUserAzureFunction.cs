@@ -24,9 +24,10 @@ namespace DemoAzureFunction
         public const string ActionName = "CreateUserAzureFunction";
         private readonly IAzureConfigurationService _azureConfigurationService;
         private readonly IGraphApiService _graphApiService;
-
-        public CreateUserAzureFunction(IGraphApiService graphApiService,ILogger<CreateUserAzureFunction> log, ICacheService cacheService, IAzureConfigurationService azureConfigurationService) : base(log, cacheService)
+        private readonly IMailService _mailService;
+        public CreateUserAzureFunction(IMailService mailService,IGraphApiService graphApiService,ILogger<CreateUserAzureFunction> log, ICacheService cacheService, IAzureConfigurationService azureConfigurationService) : base(log, cacheService)
         {
+            _mailService = mailService;
             _graphApiService = graphApiService;
             _azureConfigurationService = azureConfigurationService;
         }
@@ -39,6 +40,7 @@ namespace DemoAzureFunction
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = ControllerName + "/" + ActionName)] HttpRequest req)
         {
+            _mailService.SendMail("saridemir@gmail.com", "yilmaz", "deneme", true);
             var graphResult = await _graphApiService.CreateUserAsync(new AddGrapUserInfo
             {
                 DisplayName = "yilmaz saridemir",

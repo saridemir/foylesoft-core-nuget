@@ -12,5 +12,6 @@ namespace FoyleSoft.AzureCore.Interfaces
         AzureConfigInfo AzureConfig { get; set; }
 
         ClientConfigInfo ClientConfig { get; set; }
+        MailConfigInfo MailConfig { get; set; }
     }
 }

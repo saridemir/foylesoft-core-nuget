@@ -32,11 +32,11 @@ namespace FoyleSoft.AzureCore.Extensions
             List<Assembly> serviceDlls,
             Type customSesionRepository,
             Type sessionService,
-            Assembly apiDll, string configurationKey, string clientConfigurationKey)
+            Assembly apiDll, string configurationKey, string clientConfigurationKey, string mailConfigurationKey)
         {
             var _configuration = builder.Services.BuildServiceProvider().GetService<IConfiguration>();
 
-            RunAllServices(_configuration, builder.Services, dataDlls, serviceDlls, customSesionRepository, sessionService, apiDll, configurationKey, clientConfigurationKey);
+            RunAllServices(_configuration, builder.Services, dataDlls, serviceDlls, customSesionRepository, sessionService, apiDll, configurationKey, clientConfigurationKey, mailConfigurationKey);
             return builder;
         }
         public static void RunAllServices(IConfiguration _configuration, IServiceCollection services,
@@ -44,13 +44,13 @@ namespace FoyleSoft.AzureCore.Extensions
             List<Assembly> serviceDlls,
             Type customSesionRepository,
             Type sessionService,
-            Assembly apiDll, string configurationKey, string clientConfigurationKey)
+            Assembly apiDll, string configurationKey, string clientConfigurationKey, string mailConfigurationKey)
         {
 
             var dummy = new Dummy();
 
             //services.AddTransient<IRoleService, RoleService>();
-            services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>(f => new AzureConfigurationService(_configuration, configurationKey, clientConfigurationKey));
+            services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>(f => new AzureConfigurationService(_configuration, configurationKey, clientConfigurationKey, mailConfigurationKey));
             services.AddScoped<IAzureADJwtBearerValidation, AzureADJwtBearerValidation>();
             services.AddSingleton<ICacheService, CacheService>();
             services.AddScoped<IRoleService, RoleService>();
