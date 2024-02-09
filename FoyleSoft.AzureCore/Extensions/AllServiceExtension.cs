@@ -55,6 +55,7 @@ namespace FoyleSoft.AzureCore.Extensions
             services.AddSingleton<ICacheService, CacheService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IGraphApiService, GraphApiService>();
+            services.AddScoped<IMailService, MailService>();
             services.AddHttpContextAccessor();
 
             var azureConfigurationService = services.BuildServiceProvider().GetService<IAzureConfigurationService>();
