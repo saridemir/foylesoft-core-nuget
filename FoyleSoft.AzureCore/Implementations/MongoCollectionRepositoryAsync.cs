@@ -2,6 +2,7 @@
 using FoyleSoft.AzureCore.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Collections;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
@@ -46,13 +47,23 @@ namespace FoyleSoft.AzureCore.Implementations
             }
         }
         public async Task AddAsync(Guid reference, List<T> data)
-        {
+        {            
             var collection = _database.GetCollection<T>(reference.ToString());
+            if (collection == null)
+            {
+                await _database.CreateCollectionAsync(reference.ToString());
+                collection = _database.GetCollection<T>(reference.ToString());
+            }
             await collection.InsertManyAsync(data);
         }
         public async Task AddToCollectionAsync(string collectionName, T data)
         {
             var collection = _database.GetCollection<T>(collectionName);
+            if (collection == null)
+            {
+                await _database.CreateCollectionAsync(collectionName);
+                collection = _database.GetCollection<T>(collectionName);
+            }
             await collection.InsertOneAsync(data);
         }
 
@@ -126,6 +137,11 @@ namespace FoyleSoft.AzureCore.Implementations
             var filter = builder.Where(q => q._id == data._id);
 
             var collection = _database.GetCollection<T>(reference.ToString());
+            if (collection == null)
+            {
+                await _database.CreateCollectionAsync(reference.ToString());
+                collection = _database.GetCollection<T>(reference.ToString());
+            }
             await collection.DeleteOneAsync(filter);
         }
 
@@ -135,6 +151,11 @@ namespace FoyleSoft.AzureCore.Implementations
             var filter = builder.Where(q => q._id == data._id);
 
             var collection = _database.GetCollection<T>(reference);
+            if (collection == null)
+            {
+                await _database.CreateCollectionAsync(reference.ToString());
+                collection = _database.GetCollection<T>(reference.ToString());
+            }
             await collection.DeleteOneAsync(filter);
         }
 
@@ -144,6 +165,11 @@ namespace FoyleSoft.AzureCore.Implementations
             var filter = builder.Where(q => q._id == data._id);
 
             var collection = _database.GetCollection<T>(reference);
+            if (collection == null)
+            {
+                await _database.CreateCollectionAsync(reference.ToString());
+                collection = _database.GetCollection<T>(reference.ToString());
+            }
             var response = await collection.ReplaceOneAsync(filter, data);
 
             return response.IsAcknowledged && response.ModifiedCount == 1;
