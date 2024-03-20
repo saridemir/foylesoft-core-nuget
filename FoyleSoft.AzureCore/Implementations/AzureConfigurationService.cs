@@ -21,7 +21,10 @@ namespace FoyleSoft.AzureCore.Implementations
             
             AzureConfig = JsonConvert.DeserializeObject<AzureConfigInfo>(configuration.GetSection(configurationKey).Value);
             ClientConfig = JsonConvert.DeserializeObject<ClientConfigInfo>(configuration.GetSection(clientConfigurationKey).Value);
-            MailConfig = JsonConvert.DeserializeObject<MailConfigInfo>(configuration.GetSection(mailConfigurationKey).Value);
+            if (!string.IsNullOrEmpty(mailConfigurationKey) && !string.IsNullOrEmpty(configuration.GetSection(mailConfigurationKey).Value))
+            {
+                MailConfig = JsonConvert.DeserializeObject<MailConfigInfo>(configuration.GetSection(mailConfigurationKey).Value);
+            }
         }
         public AzureConfigInfo AzureConfig { get; set; }
 
