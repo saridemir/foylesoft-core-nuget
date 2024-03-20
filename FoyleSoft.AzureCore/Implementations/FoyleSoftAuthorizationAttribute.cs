@@ -68,7 +68,7 @@ namespace FoyleSoft.AzureCore.Implementations
                     ClaimsPrincipal principal; // This can be used for any claims
                     if ((principal = azureADJwtBearerValidation.ValidateTokenAsync(authorizationHeader).Result) == null)
                     {
-                    //    throw new UnauthorizedAccessException("Unable to find auth you");
+                        throw new UnauthorizedAccessException("Unable to find auth you");
 
                     }
                     var actionName = controllerActionDescriptor.ActionName;
