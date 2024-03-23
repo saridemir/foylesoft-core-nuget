@@ -19,7 +19,7 @@ namespace FoyleSoft.AzureCore.Implementations
         {
             _azureConfigurationService = azureConfigurationService;
         }
-        public IBaseResponse<bool> SendEvent(string mailAddress)
+        public IBaseResponse<bool> SendEvent(string receiverEmailAddress, string receiverDisplayName,Guid uid,string title, string body, DateTimeOffset startDate, DateTimeOffset endDate,string location)
         {
             try
             {
@@ -27,21 +27,27 @@ namespace FoyleSoft.AzureCore.Implementations
                 System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                 MailAddress from = new MailAddress(mailConfig.MailUserName,
                     mailConfig.MailUserName);
-                MailAddress receiver = new MailAddress(mailAddress, mailAddress);
+                if (string.IsNullOrEmpty(receiverDisplayName)) 
+                {
+                    receiverDisplayName = receiverEmailAddress;
+                }
+
+                MailAddress receiver = new MailAddress(receiverEmailAddress, receiverDisplayName);
 
                 var msg = new MailMessage(from, receiver);
-
+                msg.Body = body;
+                msg.Subject = title;
                 StringBuilder str = new StringBuilder();
                 str.AppendLine("BEGIN:VCALENDAR");
                 str.AppendLine("PRODID:-//Schedule a Meeting");
                 str.AppendLine("VERSION:2.0");
                 str.AppendLine("METHOD:REQUEST");
                 str.AppendLine("BEGIN:VEVENT");
-                str.AppendLine(string.Format("DTSTART:{0:yyyyMMddTHHmmssZ}", DateTime.Now.AddMinutes(+330)));
+                str.AppendLine(string.Format("DTSTART:{0:yyyyMMddTHHmmssZ}", startDate));
                 str.AppendLine(string.Format("DTSTAMP:{0:yyyyMMddTHHmmssZ}", DateTime.UtcNow));
-                str.AppendLine(string.Format("DTEND:{0:yyyyMMddTHHmmssZ}", DateTime.Now.AddMinutes(+660)));
-                str.AppendLine("LOCATION: " + "abcd");
-                str.AppendLine(string.Format("UID:{0}", Guid.NewGuid()));
+                str.AppendLine(string.Format("DTEND:{0:yyyyMMddTHHmmssZ}", endDate));
+                str.AppendLine("LOCATION: " +location);
+                str.AppendLine(string.Format("UID:{0}", uid));
                 str.AppendLine(string.Format("DESCRIPTION:{0}", msg.Body));
                 str.AppendLine(string.Format("X-ALT-DESC;FMTTYPE=text/html:{0}", msg.Body));
                 str.AppendLine(string.Format("SUMMARY:{0}", msg.Subject));
@@ -60,7 +66,7 @@ namespace FoyleSoft.AzureCore.Implementations
                 byte[] byteArray = Encoding.ASCII.GetBytes(str.ToString());
                 MemoryStream stream = new MemoryStream(byteArray);
 
-                Attachment attach = new Attachment(stream, "test.ics");
+                Attachment attach = new Attachment(stream, "meeting.ics");
 
                 msg.Attachments.Add(attach);
 
