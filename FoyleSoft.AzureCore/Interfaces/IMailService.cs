@@ -13,3 +13,6 @@ namespace FoyleSoft.AzureCore.Interfaces
         IBaseResponse<bool> SendEvent(string receiverEmailAddress, string receiverDisplayName, string eventCreator, Guid uid, string title, string body, DateTimeOffset startDate, DateTimeOffset endDate, string location);
     }
 }
+
+
+
