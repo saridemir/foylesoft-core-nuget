@@ -10,5 +10,6 @@ namespace FoyleSoft.AzureCore.Interfaces
     public interface IMailService : IBaseService
     {
         IBaseResponse<bool> SendMail(string mailAddress, string subject, string messageBody, bool isHtml);
+        IBaseResponse<bool> SendEvent(string mailAddress);
     }
 }
