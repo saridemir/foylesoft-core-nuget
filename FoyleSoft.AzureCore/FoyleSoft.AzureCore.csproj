@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>2.1.14</Version>
+    <Version>2.1.17</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,3 +32,6 @@
   </ItemGroup>
 
 </Project>
+
+
+

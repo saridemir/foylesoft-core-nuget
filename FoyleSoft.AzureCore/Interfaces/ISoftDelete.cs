@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoyleSoft.AzureCore.Interfaces
 {
+
     public interface ISoftDelete
     {
         bool IsDeleted { get; set; }

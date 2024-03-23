@@ -19,7 +19,7 @@ namespace FoyleSoft.AzureCore.Implementations
         {
             _azureConfigurationService = azureConfigurationService;
         }
-        public IBaseResponse<bool> SendEvent(string receiverEmailAddress, string receiverDisplayName,Guid uid,string title, string body, DateTimeOffset startDate, DateTimeOffset endDate,string location)
+        public IBaseResponse<bool> SendEvent(string receiverEmailAddress, string receiverDisplayName, string eventCreator, Guid uid,string title, string body, DateTimeOffset startDate, DateTimeOffset endDate,string location)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace FoyleSoft.AzureCore.Implementations
                 str.AppendLine(string.Format("DESCRIPTION:{0}", msg.Body));
                 str.AppendLine(string.Format("X-ALT-DESC;FMTTYPE=text/html:{0}", msg.Body));
                 str.AppendLine(string.Format("SUMMARY:{0}", msg.Subject));
-                str.AppendLine(string.Format("ORGANIZER:MAILTO:{0}", msg.From.Address));
+                str.AppendLine(string.Format("ORGANIZER:MAILTO:{0}", eventCreator));
 
                 str.AppendLine(string.Format("ATTENDEE;CN=\"{0}\";RSVP=TRUE:mailto:{1}", msg.To[0].DisplayName, msg.To[0].Address));
 
