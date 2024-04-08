@@ -19,7 +19,7 @@ namespace FoyleSoft.AzureCore.Implementations
         {
             _azureConfigurationService = azureConfigurationService;
         }
-        public IBaseResponse<bool> SendEvent(string receiverEmailAddress, string receiverDisplayName, string eventCreator, Guid uid,string title, string body, DateTimeOffset startDate, DateTimeOffset endDate,string location)
+        public IBaseResponse<bool> SendEvent(string receiverEmailAddress, string receiverDisplayName, string eventCreator, Guid uid,string title, string body, DateTimeOffset startDate, DateTimeOffset endDate,bool isHtml, string location)
         {
             try
             {
@@ -37,6 +37,8 @@ namespace FoyleSoft.AzureCore.Implementations
                 var msg = new MailMessage(from, receiver);
                 msg.Body = body;
                 msg.Subject = title;
+                msg.IsBodyHtml = isHtml;
+
                 StringBuilder str = new StringBuilder();
                 str.AppendLine("BEGIN:VCALENDAR");
                 str.AppendLine("PRODID:-//Schedule a Meeting");
