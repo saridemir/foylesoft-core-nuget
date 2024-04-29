@@ -12,6 +12,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using System.Reflection;
 using System.Collections.Generic;
 using DemoAzureFunction.Mocks;
+using FoyleSoft.AzureCore.Interfaces.Repositories.Roles;
 
 [assembly: FunctionsStartup(typeof(DemoAzureFunction.Startup))]
 namespace DemoAzureFunction
@@ -32,7 +33,7 @@ namespace DemoAzureFunction
                 typeof(MockSessionBaseRepositoryAsync<>),
                 typeof(MockSessionService),
                 Assembly.GetExecutingAssembly(), "AzureConfigAdmin", "AdminConfig", "EmailConfig");
-
+            
         }
     }
     internal class OpenApiConfigurationOptions : DefaultOpenApiConfigurationOptions

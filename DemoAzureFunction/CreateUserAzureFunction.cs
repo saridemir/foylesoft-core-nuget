@@ -40,29 +40,29 @@ namespace DemoAzureFunction
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = ControllerName + "/" + ActionName)] HttpRequest req)
         {
-            _mailService.SendMail("saridemir@gmail.com", "yilmaz", "deneme", true);
-            var graphResult = await _graphApiService.CreateUserAsync(new AddGrapUserInfo
-            {
-                DisplayName = "yilmaz saridemir",
-                AccountEnabled = true,
-                GivenName = "yilmaz",
-                Surname = "saridemir",
-                Identities = new List<Identity>
-                        {
-                            new Identity
-                            {
-                                Issuer =_azureConfigurationService.AzureConfig.Domain,
-                                IssuerAssignedId ="demo@foylesoft.co.uk",
-                                SignInType = "emailAddress"
-                            }
-                        },
-                PasswordProfile = new PasswordProfile
-                {
-                    ForceChangePasswordNextSignIn = false,
-                    Password = "Aa" + Guid.NewGuid().ToString() + ".",
-                }
-            });
-            dynamic graphResultData = JsonConvert.DeserializeObject(graphResult);
+            //_mailService.SendMail("saridemir@gmail.com", "yilmaz", "deneme", true);
+            //var graphResult = await _graphApiService.CreateUserAsync(new AddGrapUserInfo
+            //{
+            //    DisplayName = "yilmaz saridemir",
+            //    AccountEnabled = true,
+            //    GivenName = "yilmaz",
+            //    Surname = "saridemir",
+            //    Identities = new List<Identity>
+            //            {
+            //                new Identity
+            //                {
+            //                    Issuer =_azureConfigurationService.AzureConfig.Domain,
+            //                    IssuerAssignedId ="demo@foylesoft.co.uk",
+            //                    SignInType = "emailAddress"
+            //                }
+            //            },
+            //    PasswordProfile = new PasswordProfile
+            //    {
+            //        ForceChangePasswordNextSignIn = false,
+            //        Password = "Aa" + Guid.NewGuid().ToString() + ".",
+            //    }
+            //});
+            //dynamic graphResultData = JsonConvert.DeserializeObject(graphResult);
 
             return await Task.FromResult(new OkObjectResult("Ver. 1.0"));
         }
