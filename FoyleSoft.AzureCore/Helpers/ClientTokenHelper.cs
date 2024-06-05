@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace FoyleSoft.AzureCore.Helpers
             _configurationService = configurationService;
         }
 
-        public IBaseResponse<string> GenerateFormJWTTokenByClaims(Guid licenseGuid, string jsonString)
+        public IBaseResponse<string> GenerateFormJWTTokenByClaims(Guid licenseGuid, string jsonString,string oid="")
         {
             try
             {
@@ -35,6 +36,7 @@ namespace FoyleSoft.AzureCore.Helpers
                     new Claim("UserId", "0"),
                     new Claim("UserName", "contact"),
                     new Claim("License", "0"),
+                    new Claim("oid", oid),                    
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
                 claims.AddRange(userRoles.Select(n => new Claim(ClaimTypes.Role, n)));
