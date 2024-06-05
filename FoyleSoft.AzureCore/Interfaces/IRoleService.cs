@@ -15,7 +15,7 @@ namespace FoyleSoft.AzureCore.Interfaces
         Task<IBaseResponse<List<string>>> GetPermitedControllers(List<string> controlNames);
         Task<IBaseResponse<List<string>>> GetPermitedControllerMethods(string controllerName, List<string> methods);
         Task<IBaseResponse<List<string>>> GetUserRoles(int userId);
-
+        Task<IBaseResponse<List<string>>> GetUserRoleMappings(int userId);
         Task<IBaseResponse<List<RoleInfo>>> GetRoles();
 
         Task<IBaseResponse<Role>> SaveRole(Role role);

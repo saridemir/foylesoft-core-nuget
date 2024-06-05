@@ -4,6 +4,7 @@ using FoyleSoft.AzureCore.Models;
 using FoyleSoft.AzureCore.Models.Roles;
 using FoyleSoft.Core.Implementations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -150,7 +151,23 @@ namespace FoyleSoft.AzureCore.Implementations
                 return new BaseResponse<List<RoleInfo>> { IsSuccess = false, ErrorMessage = ex.Message };
             }
         }
+        public async Task<IBaseResponse<List<string>>> GetUserRoleMappings(int userId) 
+        {
+            var customRoles = await _customUserRoleRepository.GetAllIncludingAsync(f => f.Role).Result
+            .Where(f => f.UserId == userId)
+            .Select(f => f.Role.Id)
+            .ToListAsync();
 
+            var userRoles = await _userRoleRepository
+                    .GetAllIncludingAsync(f => f.Role).Result
+                    .Where(f => f.UserId == userId)
+                    .Select(f => f.Role.Id).ToListAsync();
+
+            var responseValues = customRoles.Union(userRoles).ToList();
+            var result =await _roleMappingRepository.GetAllAsync(f => responseValues.Contains(f.RoleId));
+            return new BaseResponse<List<string>> { IsSuccess = true, Data = result.Select(f=>f.RolePattern).ToList() };
+
+        }
         public async Task<IBaseResponse<List<string>>> GetUserRoles(int userId)
         {
             var customRoles = await _customUserRoleRepository.GetAllIncludingAsync(f => f.Role).Result
