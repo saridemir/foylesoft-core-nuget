@@ -35,7 +35,7 @@ namespace FoyleSoft.AzureCore.Implementations
         }
 
 
-        public async Task<IBaseResponse<List<string>>> GetPermitedControllerMethods(string controllerName, List<string> methods)
+        public virtual async Task<IBaseResponse<List<string>>> GetPermitedControllerMethods(string controllerName, List<string> methods)
         {
             var roleMappings = await _roleMappingRepository.FindCachedAllAsync(f => true);
 
@@ -63,7 +63,7 @@ namespace FoyleSoft.AzureCore.Implementations
             return new BaseResponse<List<string>> { IsSuccess = true, Data = result.ToList() };
         }
 
-        public async Task<IBaseResponse<List<string>>> GetPermitedControllers(List<string> controlNames)
+        public virtual async Task<IBaseResponse<List<string>>> GetPermitedControllers(List<string> controlNames)
         {
             var userRoleIds = _userRoleRepository.FindCachedAllAsync(f => f.UserId == _sessionService.CurrentUserId).Result.Select(y => y.RoleId)
                 .Distinct()
@@ -103,7 +103,7 @@ namespace FoyleSoft.AzureCore.Implementations
             }
         }
 
-        public async Task<IBaseResponse<List<RoleInfo>>> GetRoles()
+        public virtual async Task<IBaseResponse<List<RoleInfo>>> GetRoles()
         {
             try
             {
@@ -151,7 +151,7 @@ namespace FoyleSoft.AzureCore.Implementations
                 return new BaseResponse<List<RoleInfo>> { IsSuccess = false, ErrorMessage = ex.Message };
             }
         }
-        public async Task<IBaseResponse<List<string>>> GetUserRoleMappings(int userId) 
+        public virtual async Task<IBaseResponse<List<string>>> GetUserRoleMappings(int userId) 
         {
             var customRoles = await _customUserRoleRepository.GetAllIncludingAsync(f => f.Role).Result
             .Where(f => f.UserId == userId)
@@ -168,7 +168,7 @@ namespace FoyleSoft.AzureCore.Implementations
             return new BaseResponse<List<string>> { IsSuccess = true, Data = result.Select(f=>f.RolePattern).ToList() };
 
         }
-        public async Task<IBaseResponse<List<string>>> GetUserRoles(int userId)
+        public virtual async Task<IBaseResponse<List<string>>> GetUserRoles(int userId)
         {
             var customRoles = await _customUserRoleRepository.GetAllIncludingAsync(f => f.Role).Result
             .Where(f => f.UserId == userId)
@@ -186,7 +186,7 @@ namespace FoyleSoft.AzureCore.Implementations
         }
 
 
-        public async Task<bool> HasAccessAsync(string key)
+        public virtual async Task<bool> HasAccessAsync(string key)
         {
             var roleMappings = await _roleMappingRepository.FindCachedAllAsync(f => true);
             var userRoleIds = _userRoleRepository.FindCachedAllAsync(f => f.UserId == _sessionService.CurrentUserId)
@@ -208,7 +208,7 @@ namespace FoyleSoft.AzureCore.Implementations
             return false;
         }
 
-        public async Task<IBaseResponse<Role>> SaveRole(Role role)
+        public virtual async Task<IBaseResponse<Role>> SaveRole(Role role)
         {
             try
             {
