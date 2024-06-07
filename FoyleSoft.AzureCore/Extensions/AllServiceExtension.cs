@@ -26,17 +26,32 @@ namespace FoyleSoft.AzureCore.Extensions
     {
         private static Assembly _dataDll;
         public static IFunctionsHostBuilder ApplyAllServices(this IFunctionsHostBuilder builder,
+             //List<Claim> claims,
+             //List<string> roleNames,
+             List<Assembly> dataDlls,
+             List<Assembly> serviceDlls,
+             Type customSesionRepository,
+             Type sessionService,
+             Assembly apiDll, string configurationKey, string clientConfigurationKey, string mailConfigurationKey)
+        {
+            return ApplyAllServices(builder, dataDlls,
+             serviceDlls,
+             customSesionRepository,
+             sessionService,
+             typeof(RoleService), apiDll, configurationKey, clientConfigurationKey, mailConfigurationKey);
+        }
+        public static IFunctionsHostBuilder ApplyAllServices(this IFunctionsHostBuilder builder,
             //List<Claim> claims,
             //List<string> roleNames,
             List<Assembly> dataDlls,
             List<Assembly> serviceDlls,
             Type customSesionRepository,
             Type sessionService,
+            Type roleService,
             Assembly apiDll, string configurationKey, string clientConfigurationKey, string mailConfigurationKey)
         {
             var _configuration = builder.Services.BuildServiceProvider().GetService<IConfiguration>();
-
-            RunAllServices(_configuration, builder.Services, dataDlls, serviceDlls, customSesionRepository, sessionService, apiDll, configurationKey, clientConfigurationKey, mailConfigurationKey);
+            RunAllServices(_configuration, builder.Services, dataDlls, serviceDlls, customSesionRepository, sessionService, roleService, apiDll, configurationKey, clientConfigurationKey, mailConfigurationKey);
             return builder;
         }
         public static void RunAllServices(IConfiguration _configuration, IServiceCollection services,
@@ -44,6 +59,7 @@ namespace FoyleSoft.AzureCore.Extensions
             List<Assembly> serviceDlls,
             Type customSesionRepository,
             Type sessionService,
+             Type roleService,
             Assembly apiDll, string configurationKey, string clientConfigurationKey, string mailConfigurationKey)
         {
 
@@ -53,10 +69,12 @@ namespace FoyleSoft.AzureCore.Extensions
             services.AddSingleton<IAzureConfigurationService, AzureConfigurationService>(f => new AzureConfigurationService(_configuration, configurationKey, clientConfigurationKey, mailConfigurationKey));
             services.AddScoped<IAzureADJwtBearerValidation, AzureADJwtBearerValidation>();
             services.AddSingleton<ICacheService, CacheService>();
-            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IGraphApiService, GraphApiService>();
             services.AddScoped<IMailService, MailService>();
             services.AddHttpContextAccessor();
+            dummy.RunRepositoryService(services, roleService);
+            dummy.RunRepositorySessionService(services, sessionService);
+
 
             var azureConfigurationService = services.BuildServiceProvider().GetService<IAzureConfigurationService>();
             if (azureConfigurationService != null)
@@ -82,8 +100,6 @@ namespace FoyleSoft.AzureCore.Extensions
                 {
                     dummy.RunRepository(services, azureConfigurationService, serviceDll, typeof(IBaseService), customSesionRepository);
                 });
-
-                dummy.RunRepositorySessionService(services, sessionService);
 
 
                 var azureCacheService = services.BuildServiceProvider().GetService<ICacheService>();
@@ -279,8 +295,25 @@ namespace FoyleSoft.AzureCore.Extensions
                 }
             });
         }
+        public void RunRepositoryService(IServiceCollection services,
+    Type sessionService)
+        {
+
+
+            MethodInfo? methodSessionService = typeof(Dummy).GetMethod(nameof(Dummy.AddScoped),
+                BindingFlags.Public | BindingFlags.Instance);
+            if (methodSessionService != null)
+            {
+                var sessionServiceInterface = sessionService.GetInterface("I" + sessionService.Name);
+                if (sessionServiceInterface != null)
+                {
+                    methodSessionService = methodSessionService.MakeGenericMethod(sessionServiceInterface, sessionService);
+                    methodSessionService.Invoke(this, new object[] { services });
+                }
+            }
+        }
         public void RunRepositorySessionService(IServiceCollection services,
-            Type sessionService)
+        Type sessionService)
         {
 
 
