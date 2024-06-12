@@ -32,6 +32,7 @@ namespace DemoAzureFunction
                 new List<Assembly> { typeof(DummyService).Assembly },
                 typeof(MockSessionBaseRepositoryAsync<>),
                 typeof(MockSessionService),
+                typeof(RoleService),
                 Assembly.GetExecutingAssembly(), "AzureConfigAdmin", "AdminConfig", "EmailConfig");
             
         }

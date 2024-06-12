@@ -8,6 +8,8 @@ namespace FoyleSoft.Core.Implementations
     {
         public int UserId { get; set; }
         public int RoleId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime FinishDate { get; set; }
 
         //[System.Text.Json.Serialization.JsonIgnore][Newtonsoft.Json.JsonIgnore] public User User { get; set; }
         [System.Text.Json.Serialization.JsonIgnore][Newtonsoft.Json.JsonIgnore] 
