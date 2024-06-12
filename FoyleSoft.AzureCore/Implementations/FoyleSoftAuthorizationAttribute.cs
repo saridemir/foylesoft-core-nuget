@@ -65,12 +65,12 @@ namespace FoyleSoft.AzureCore.Implementations
                     {
                         authorizationHeader = authorizationHeader.Substring(7);
                     }
-                    ClaimsPrincipal principal; // This can be used for any claims
-                    if ((principal = azureADJwtBearerValidation.ValidateTokenAsync(authorizationHeader).Result) == null)
-                    {
-                        throw new UnauthorizedAccessException("Unable to find auth you");
+                    //ClaimsPrincipal principal; // This can be used for any claims
+                    //if ((principal = azureADJwtBearerValidation.ValidateTokenAsync(authorizationHeader).Result) == null)
+                    //{
+                    //    throw new UnauthorizedAccessException("Unable to find auth you");
 
-                    }
+                    //}
                     var actionName = controllerActionDescriptor.ActionName;
                     var pattern = $"{controllerName}.{actionName}";
 
